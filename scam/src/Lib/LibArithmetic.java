@@ -3,6 +3,7 @@ package Lib;
 import Exceptions.LispError;
 import Exceptions.WrongNofArgsError;
 import Exceptions.WrongTypeError;
+import LispObjects.LispNumber;
 import LispObjects.LispObject;
 import LispObjects.NIL;
 import LispObjects.NumberInteger;
@@ -13,27 +14,19 @@ import LispObjects.Symbol;
 import System.Environment;
 import System.Kernel;
 
-//
-//  LibArithmetic.java
-//  LispII
-//
-
-//
-// Anonymous action classes implement this interface, to define how to perform a calculation on different types of numbers
-//
-
+/**
+ * Anonymous action classes implement this interface, to define how to perform a calculation on different types of numbers
+ */
 interface ArithmeticAction {
 	public LispObject doWithReals(float f1, float f2) throws LispError;
 	public LispObject doWithRationals(long numerator1, long denominator1, long numerator2, long denominator2) throws LispError;
 	public LispObject doWithIntegers(long i1, long i2) throws LispError;
 }
 
-//
-// LibArithmetic
-// 
-// Procedures in this library work on operands of type number
-//
-
+/**
+ * The LibArithmetic class implements all arithmetic operations for all number types.
+ * 
+ */
 public class LibArithmetic {
 
 	public void init(Environment e) {
@@ -48,10 +41,6 @@ public class LibArithmetic {
 		e.define(new Symbol("<"), new Parithmetic(smaller, null, Kernel.one, null));
 	}
 
-	//
-	// ArithmeticActions define how to perform an arithmetic action on different types of numbers
-	//
-	
 	public static final ArithmeticAction compare = new ArithmeticAction() {
 		public LispObject doWithReals(float f1, float f2) throws LispError {
 			return (f1 == f2)? Kernel.one : NIL.instance;
@@ -167,11 +156,18 @@ public class LibArithmetic {
 		}
 	};
 
-	//
-	// perform calls the appropriate method of an action object, depending on the input number types
-	// 
-
-	public static LispObject perform(LispObjects.LispNumber n1, LispObjects.LispNumber n2, ArithmeticAction a) throws LispError {
+	/**
+	 * Performs an arithmetic operation on two operands by
+	 * calling the appropriate method of the ArithmeticAction object, 
+	 * depending on the input number types 
+	 * 
+	 * @param n1 First operand
+	 * @param n2 Second operand
+	 * @param a Operation to perform.
+	 * @return Result of operation
+	 * @throws LispError
+	 */
+	public static LispObject perform(LispNumber n1, LispNumber n2, ArithmeticAction a) throws LispError {
 		// One or two reals
 		if (n1.isReal() || n2.isReal())
 			return a.doWithReals(n1.toReal().getValue(), n2.toReal().getValue());
@@ -191,15 +187,27 @@ public class LibArithmetic {
 	// resultIfOneOperand		Same as above, for 1 operand
 	// firstValueIfOneOperand	What to use as first value for the action if there is one argument, resultIfOneOperand must be null
 	//
-
-	class Parithmetic extends Procedure {
+	/**
+	 * Parithmetic encapsulates an arithmetic action as a procedure
+	 * that can be called at the language level.
+	 * 
+	 */
+	public class Parithmetic extends Procedure {
 		
-		ArithmeticAction action;
-		LispObject resultIfZeroOperands;
-		LispObject resultIfOneOperand;
-		LispObjects.LispNumber firstValueIfOneOperand;
-				
-		Parithmetic(ArithmeticAction action, LispObject resultIfZeroOperands, LispObject resultIfOneOperand, LispObjects.LispNumber firstValueIfOneOperand) {
+		private ArithmeticAction action;
+		private LispObject resultIfZeroOperands;
+		private LispObject resultIfOneOperand;
+		private LispNumber firstValueIfOneOperand;
+		
+		/**
+		 * Construct a new arithmetic procedure.
+		 * 
+		 * @param action Action to perform.
+		 * @param resultIfZeroOperands Result if there are zero operands.
+		 * @param resultIfOneOperand Result if there is one operand.
+		 * @param firstValueIfOneOperand The first value in case there is one operand.
+		 */
+		public Parithmetic(ArithmeticAction action, LispObject resultIfZeroOperands, LispObject resultIfOneOperand, LispNumber firstValueIfOneOperand) {
 			this.action = action;
 			this.resultIfZeroOperands = resultIfZeroOperands;
 			this.resultIfOneOperand = resultIfOneOperand;
@@ -207,14 +215,14 @@ public class LibArithmetic {
 		}
 		
 		public LispObject execute(LispObject operands, Environment environment) throws LispError {
-			// Check if there are no operands
+			/* Check if there are no operands */
 			if (operands == NIL.instance) {
 				if (resultIfZeroOperands == null) throw new WrongNofArgsError();
 					else return resultIfZeroOperands;
 			}
 			
-			// Check if there is one operand
-			LispObjects.LispNumber firstOperand = Kernel.eval(operands.asCons().objectAt(0), environment).asNumber();
+			/* Check if there is one operand */
+			LispNumber firstOperand = Kernel.eval(operands.asCons().objectAt(0), environment).asNumber();
 			if (operands.asCons().size() == 1) {
 				if (resultIfOneOperand == null) {
 					if (firstValueIfOneOperand == null) {
@@ -227,7 +235,7 @@ public class LibArithmetic {
 				}					
 			}
 			
-			// 2 or more operands
+			/* 2 or more operands */
 			LispObject result = firstOperand;
 			operands = operands.asCons().getCdr();
 			while (operands != NIL.instance) {
@@ -240,12 +248,16 @@ public class LibArithmetic {
 		}
 	}
 
-	// Least common multiple
+	/**
+	 * @return least common multiple of a and b.
+	 */
 	private static long lcm(long a, long b) {
 		return (a * b) / gcd(a, b);
 	}
 
-	// Greatest common divisor
+	/**
+	 * @return Greatest common divisor of a and b.
+	 */
 	private static long gcd(long a, long b) {
 		long t;
 		while (b != 0) {

@@ -1,12 +1,5 @@
 package Lib;
 
-//
-//  LibSystem.java
-//  LispII
-//
-//  Created by Tjitze Rienstra on 11/28/04.
-//  Copyright 2004 __MyCompanyName__. All rights reserved.
-//
 import java.io.*;
 import java.util.*;
 
@@ -27,6 +20,10 @@ import System.Environment;
 import System.Kernel;
 import System.Parser;
 
+/**
+ * The LibSystem class contains a collection of procedures
+ * that are internally defined.
+ */
 public class LibSystem {
 
 	public void init(Environment e) {

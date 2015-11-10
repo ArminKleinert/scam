@@ -1,7 +1,3 @@
-//
-//  Scam.java
-//  SC@M V 1
-//
 
 import java.util.*;
 import java.io.*;
@@ -19,7 +15,6 @@ public class Scam {
 		//	TypesTest.testAll();
 		//	EnvironmentTest.testDefine();
 		//} catch (LispError e) { System.out.println(e); }
-
 
 		System.out.println("Welcome to SC@M");
 		Kernel kernel = new Kernel();
@@ -42,7 +37,6 @@ public class Scam {
 		kthread.run();
 	}
 }
-
 
 // execute repl in thread, because command line stack size settings do not affect the 
 // main thread, only other threads.
