@@ -1,5 +1,5 @@
 
-******** What is SC@M?
+# What is SC@M?
 
 SC@M is an interpreter written in Java for a language based on Scheme. SC@M does not pretend to comply to 
 the official Scheme standard. It misses some key features such as continuations and a compatible 
@@ -28,7 +28,7 @@ Some differences
 - A different macro system
 - A different error system
 
-******** Getting started
+# Getting started
 
 The example directory contains example code for SC@M:
 
@@ -45,11 +45,11 @@ Java –jar Scam.jar
 
 Assuming sc@m is started in the original directory, you can load an example like this:
 
->(load “examples/filename.scm”) [enter]
+> (load “examples/filename.scm”) [enter]
 
 SC@M is exited with
 
->’exit [enter]
+> ’exit [enter]
 
 ******** Tail call optimization	
 
@@ -71,7 +71,7 @@ to observe that tail recursion is performed as if it is an imperative loop.
 
 See the Tail-demo.scm example file for a demonstration of tail call optimization in SC@M.
 
-******** Implemented Scheme functions
+# Implemented Scheme functions
 
 The functions listed here are based on the official scheme standard (R5RS). Note that it is possible that some 
 functions may not fully comply to the official standard, but most of them will. There are two different types 
@@ -81,26 +81,25 @@ functions. The pre-defined functions are defined in the file built-in.scm, which
 the interpreter is started, this file is read and evaluated before the interpreter shows the prompt. A copy of 
 built-in.scm file can also be found in the examples directory.
 
-Internal: Car cdr read print quote define set! Lambda cond eq? eqv? Equal? Begin cons load modulo quotient + - * / > <										
-
-Pre-defined If loop append memq memv member list length reverse map Assq assv assoc pair? Number? Symbol? Null? And or 
+**Internal:** Car cdr read print quote define set! Lambda cond eq? eqv? Equal? Begin cons load modulo quotient + - * / > <						
+**Pre-defined:** If loop append memq memv member list length reverse map Assq assv assoc pair? Number? Symbol? Null? And or 
 not <= >= even? Odd? power abs lcm gcd sqrt force delay									
 
-******** Other functions
+# Other functions
 
 The functions listed here do not appear in the Scheme standard. They are specific to SC@M.
 
-(catch <expression>)
+> (catch <expression>)
 	
 Evaluate <expression> and return its value. When an error is thrown within <expression>, it is caught, converted to a 
 string object and returned instead of the evaluation of <expression>.
 
-(throw <string>)
+> (throw <string>)
 
 Throw an error with a message described in <string>. If the error is not caught, it will make the kernel exit with an 
 “Uncaught error” message.
 
-(macro <param-list> <body>)
+> (macro <param-list> <body>)
 
 Create a macro procedure. This works just like a lambda definition, but parameters in <param-list> can be preceded by 
 a @ character, indicating the argument should not be evaluated and bound, but should replace each occurrence of the 
@@ -108,11 +107,11 @@ parameter symbol in the macro body. Unlike a lambda procedure, a macro does not 
 in which it is created, so it is not an enclosure. It also supports nested lists as parameters. See the files in the 
 example directory for examples.
 
-(objeq? <object1> <object2>)
+> (objeq? <object1> <object2>)
 
 Checks if two objects are of the same type.
 
-(repl)
+> (repl)
 	
 Starts a print-eval-read loop with error catching.
 
