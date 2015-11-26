@@ -41,7 +41,7 @@ The example directory contains example code for SC@M:
 
 The SC@M interpreter is compiled into a jar file, it must be started as follows:
 
-Java –jar Scam.jar
+> Java –jar Scam.jar
 
 Assuming sc@m is started in the original directory, you can load an example like this:
 
@@ -51,7 +51,7 @@ SC@M is exited with
 
 > ’exit [enter]
 
-******** Tail call optimization	
+# Tail call optimization	
 
 SC@M performs tail call optimization. This is extremely useful because in Scheme like languages, you often 
 perform iteration trough recursion. Tail call optimization is handled internally by marking forms when they 
