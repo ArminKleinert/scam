@@ -32,12 +32,12 @@ Some differences
 
 The example directory contains example code for SC@M:
 
-Phrase-generator.scm	A simple english phrase generator
-Sort.scm				Quicksort, Mergesort and Bubblesort
-Math.scm				Prime generator, prime tester and perfect number tester
-Tail-demo.scm			Demonstration of tail call optimization
-Regr.scm				Regression tests used during development
-Built-in.scm			Definitions of built-in lambda/macro functions
+- **Phrase-generator.scm** - A simple english phrase generator
+- **Sort.scm** - Quicksort, Mergesort and Bubblesort
+- **Math.scm** - Prime generator, prime tester and perfect number tester
+- **Tail-demo.scm** - Demonstration of tail call optimization
+- **Regr.scm** - Regression tests used during development
+- **Built-in.scm** - Definitions of built-in lambda/macro functions
 
 The SC@M interpreter is compiled into a jar file, it must be started as follows:
 
