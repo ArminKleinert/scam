@@ -89,17 +89,17 @@ not <= >= even? Odd? power abs lcm gcd sqrt force delay
 
 The functions listed here do not appear in the Scheme standard. They are specific to SC@M.
 
-> (catch <expression>)
+> (catch \<expression\>)
 	
 Evaluate <expression> and return its value. When an error is thrown within <expression>, it is caught, converted to a 
 string object and returned instead of the evaluation of <expression>.
 
-> (throw <string>)
+> (throw \<string\>)
 
 Throw an error with a message described in <string>. If the error is not caught, it will make the kernel exit with an 
 “Uncaught error” message.
 
-> (macro <param-list> <body>)
+> (macro \<param-list\> \<body\>)
 
 Create a macro procedure. This works just like a lambda definition, but parameters in <param-list> can be preceded by 
 a @ character, indicating the argument should not be evaluated and bound, but should replace each occurrence of the 
@@ -107,7 +107,7 @@ parameter symbol in the macro body. Unlike a lambda procedure, a macro does not 
 in which it is created, so it is not an enclosure. It also supports nested lists as parameters. See the files in the 
 example directory for examples.
 
-> (objeq? <object1> <object2>)
+> (objeq? \<object1\> \<object2\>)
 
 Checks if two objects are of the same type.
 
