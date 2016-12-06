@@ -91,12 +91,12 @@ The functions listed here do not appear in the Scheme standard. They are specifi
 
 > (catch \<expression\>)
 	
-Evaluate <expression> and return its value. When an error is thrown within <expression>, it is caught, converted to a 
-string object and returned instead of the evaluation of <expression>.
+Evaluate \<expression\> and return its value. When an error is thrown within \<expression\>, it is caught, converted to a 
+string object and returned instead of the evaluation of \<expression\>.
 
 > (throw \<string\>)
 
-Throw an error with a message described in <string>. If the error is not caught, it will make the kernel exit with an 
+Throw an error with a message described in \<string\>. If the error is not caught, it will make the kernel exit with an 
 “Uncaught error” message.
 
 > (macro \<param-list\> \<body\>)
