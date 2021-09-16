@@ -41,7 +41,7 @@ The example directory contains example code for SC@M:
 
 The SC@M interpreter is compiled into a jar file, it must be started as follows:
 
-> Java –jar Scam.jar
+> Java –jar scam.Scam.jar
 
 Assuming sc@m is started in the original directory, you can load an example like this:
 
@@ -77,7 +77,7 @@ The functions listed here are based on the official scheme standard (R5RS). Note
 functions may not fully comply to the official standard, but most of them will. There are two different types 
 of implemented functions. Internal functions are defined in Java, as Procedure objects. They cannot be expressed 
 in terms of SC@M code. Pre-defined functions are defined as lambda functions in terms of other implemented 
-functions. The pre-defined functions are defined in the file built-in.scm, which resides inside Scam.jar. When 
+functions. The pre-defined functions are defined in the file built-in.scm, which resides inside scam.Scam.jar. When 
 the interpreter is started, this file is read and evaluated before the interpreter shows the prompt. A copy of 
 built-in.scm file can also be found in the examples directory.
 
