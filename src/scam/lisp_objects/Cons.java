@@ -112,7 +112,6 @@ public class Cons implements LispObject, Iterable<LispObject> {
      * @return Object at index i of linked list.
      * @throws LispError .
      */
-    @Deprecated
     public LispObject objectAt(int index) throws LispError {
         if (index == 0) return car;
         if (cdr instanceof Cons) return ((Cons) cdr).objectAt(index - 1);

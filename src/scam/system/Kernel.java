@@ -130,8 +130,8 @@ public class Kernel {
 	public static LispObject evalList(LispObject list, Environment environment)	throws LispError {
 		if (list == NIL.instance) return list;
 		Cons evalList = new Cons(); // TODO: change (no empty constructor)
-		for (int i = 0; i < list.asCons().size(); i++) 
-			evalList.append(eval(list.asCons().objectAt(i), environment));
+		for (LispObject e : list.asCons())
+			evalList.append(eval(e, environment));
 		return evalList;
 	}
 

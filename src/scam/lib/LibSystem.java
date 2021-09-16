@@ -163,8 +163,7 @@ public class LibSystem {
 		if (o1.isNumber() && o2.isNumber()) return (LibArithmetic.perform(o1.asNumber(), o2.asNumber(), LibArithmetic.compare) != NIL.instance); // perform arithmetic "="
 		if (o1.isSymbol() && o2.isSymbol() && (o1.asSymbol().getName().equals(o2.asSymbol().getName()))) return true;
 		if (o1.isString() && o2.isString() && (o1.asString().getString().equals(o2.asString().getString()))) return true;
-		if (o1.hashCode() == o2.hashCode()) return true;
-		return false;
+		return o1.hashCode() == o2.hashCode();
 	}
 
 	// (OBJEQ? <PARAMETER-LIST> <BODY>)
@@ -269,9 +268,8 @@ public class LibSystem {
 			Environment closure = environment.getClosure();
 			if (operands.asCons().getCar() != NIL.instance) {
 				Cons bindings = operands.asCons().getCar().asCons();
-				int size = bindings.size();
-				for (int i = 0; i < size; i++) {
-					Cons binding = bindings.objectAt(i).asCons();
+				for (LispObject e : bindings) {
+					Cons binding = e.asCons();
 					if (binding.size() != 2) throw new WrongNofArgsError();
 					Symbol s = binding.getCar().asSymbol();
 					LispObject v = Kernel.eval(binding.getCadr(), environment);
@@ -293,9 +291,8 @@ public class LibSystem {
 			Environment closure = environment;
 			if (operands.asCons().getCar() != NIL.instance) {
 				Cons bindings = operands.asCons().getCar().asCons();
-				int size = bindings.size();
-				for (int i = 0; i < size; i++) {
-					Cons binding = bindings.objectAt(i).asCons();
+				for (LispObject e : bindings) {
+					Cons binding = e.asCons();
 					if (binding.size() != 2) throw new WrongNofArgsError();
 					Symbol s = binding.getCar().asSymbol();
 					LispObject v = Kernel.eval(binding.getCadr(), environment);
@@ -318,9 +315,8 @@ public class LibSystem {
 			Environment closure = environment.getClosure();
 			if (operands.asCons().getCar() != NIL.instance) {
 				Cons bindings = operands.asCons().getCar().asCons();
-				int size = bindings.size();
-				for (int i = 0; i < size; i++) {
-					Cons binding = bindings.objectAt(i).asCons();
+				for (LispObject e : bindings) {
+					Cons binding = e.asCons();
 					if (binding.size() != 2) throw new WrongNofArgsError();
 					Symbol s = binding.getCar().asSymbol();
 					closure.define(s, NIL.instance);
@@ -330,9 +326,8 @@ public class LibSystem {
 			/* Evaluate values */
 			if (operands.asCons().getCar() != NIL.instance) {
 				Cons bindings = operands.asCons().getCar().asCons();
-				int size = bindings.size();
-				for (int i = 0; i < size; i++) {
-					Cons binding = bindings.objectAt(i).asCons();
+				for (LispObject e : bindings) {
+					Cons binding = e.asCons();
 					if (binding.size() != 2) throw new WrongNofArgsError();
 					Symbol s = binding.getCar().asSymbol();
 					LispObject v = Kernel.eval(binding.getCadr(), closure);

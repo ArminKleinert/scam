@@ -296,7 +296,7 @@
 
   (define make-promise						; create promise closure
     (lambda (proc)
-      (let 
+      (let
         ((result-ready? nil)					; init: not ready, no result
          (result nil))
         (lambda ()							; create lambda closure:
@@ -309,5 +309,3 @@
                   (set! result-ready? 1)
                   (set! result x)
                   result))))))))
-
-(print "abc")
